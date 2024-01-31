@@ -42,3 +42,5 @@ exists(/usr/local/share/openhd/platform/rock/) {
 
 # can be used in c++, also set to be exposed in qml
 DEFINES += QOPENHD_ENABLE_VIDEO_VIA_AVCODEC
+
+PKGCONFIG += libavcodec libavutil libavformat

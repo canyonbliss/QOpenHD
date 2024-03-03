@@ -152,7 +152,7 @@ static std::string gst_create_rtp_caps(const VideoCodec& videoCodec){
   if(videoCodec==VideoCodec::H264){
     ss<<"caps=\"application/x-rtp, media=(string)video, encoding-name=(string)H264, payload=(int)96\"";
   }else if(videoCodec==VideoCodec::H265){
-    ss<<"caps=\"application/x-rtp, media=(string)video, encoding-name=(string)H265\"";
+    ss<<"caps=\"application/x-rtp-stream, media=(string)video, encoding-name=(string)H265\"";
   }else{
     ss<<"caps=\"application/x-rtp, media=(string)video, encoding-name=(string)mjpeg\"";
   }
@@ -160,7 +160,7 @@ static std::string gst_create_rtp_caps(const VideoCodec& videoCodec){
 }
 static std::string create_rtp_depacketize_for_codec(const VideoCodec& codec){
   if(codec==VideoCodec::H264)return "rtph264depay ! ";
-  if(codec==VideoCodec::H265)return "rtph265depay ! ";
+  if(codec==VideoCodec::H265)return "rtpstreamdepay ! queue ! rtph265depay ! ";
   if(codec==VideoCodec::MJPEG)return "rtpjpegdepay ! ";
   assert(false);
   return "";
